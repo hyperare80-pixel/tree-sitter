@@ -140,7 +140,6 @@ impl ProductionStep {
         }
     }
 
-    #[must_use]
     pub fn with_prec(
         mut self,
         precedence: Precedence,
@@ -151,7 +150,6 @@ impl ProductionStep {
         self
     }
 
-    #[must_use]
     pub fn with_alias(mut self, value: &str, is_named: bool) -> Self {
         self.alias = Some(Alias {
             value: value.to_string(),
@@ -160,7 +158,6 @@ impl ProductionStep {
         self
     }
 
-    #[must_use]
     pub fn with_field_name(mut self, name: &str) -> Self {
         self.field_name = Some(name.to_string());
         self
@@ -168,7 +165,6 @@ impl ProductionStep {
 }
 
 impl Production {
-    #[must_use]
     pub fn first_symbol(&self) -> Option<Symbol> {
         self.steps.first().map(|s| s.symbol)
     }
@@ -176,7 +172,6 @@ impl Production {
 
 #[cfg(test)]
 impl Variable {
-    #[must_use]
     pub fn named(name: &str, rule: Rule) -> Self {
         Self {
             name: name.to_string(),
@@ -185,7 +180,6 @@ impl Variable {
         }
     }
 
-    #[must_use]
     pub fn auxiliary(name: &str, rule: Rule) -> Self {
         Self {
             name: name.to_string(),
@@ -194,7 +188,6 @@ impl Variable {
         }
     }
 
-    #[must_use]
     pub fn hidden(name: &str, rule: Rule) -> Self {
         Self {
             name: name.to_string(),
@@ -203,7 +196,6 @@ impl Variable {
         }
     }
 
-    #[must_use]
     pub fn anonymous(name: &str, rule: Rule) -> Self {
         Self {
             name: name.to_string(),
@@ -214,7 +206,6 @@ impl Variable {
 }
 
 impl VariableType {
-    #[must_use]
     pub fn is_visible(self) -> bool {
         self == Self::Named || self == Self::Anonymous
     }
@@ -237,7 +228,6 @@ impl LexicalGrammar {
         })
     }
 
-    #[must_use]
     pub fn variable_index_for_nfa_state(&self, state_id: u32) -> usize {
         // The NFA is built in reverse (accept state first, entry state last), so
         // each variable's `start_state` is the last (highest) NFA state allocated
@@ -248,19 +238,16 @@ impl LexicalGrammar {
 }
 
 impl SyntaxVariable {
-    #[must_use]
     pub fn is_auxiliary(&self) -> bool {
         self.kind == VariableType::Auxiliary
     }
 
-    #[must_use]
     pub fn is_hidden(&self) -> bool {
         self.kind == VariableType::Hidden || self.kind == VariableType::Auxiliary
     }
 }
 
 impl InlinedProductionMap {
-    #[must_use]
     pub fn inlined_productions<'a>(
         &'a self,
         production: &Production,

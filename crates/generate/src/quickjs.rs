@@ -128,7 +128,6 @@ impl Console {
 
 #[rquickjs::methods]
 impl Console {
-    #[must_use]
     #[qjs(constructor)]
     pub const fn new() -> Self {
         Console {}

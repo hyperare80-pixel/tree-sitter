@@ -38,7 +38,6 @@ fn find_or_push<T: Eq>(vector: &mut Vec<T>, value: T) {
 }
 
 impl<'a> ParseItemSetBuilder<'a> {
-    #[must_use]
     pub fn new(
         syntax_grammar: &'a SyntaxGrammar,
         lexical_grammar: &'a LexicalGrammar,
@@ -255,7 +254,6 @@ impl<'a> ParseItemSetBuilder<'a> {
         result
     }
 
-    #[must_use]
     pub fn transitive_closure(&self, item_set: &ParseItemSet<'a>) -> ParseItemSet<'a> {
         let mut result = ParseItemSet::default();
         for entry in &item_set.entries {
@@ -280,18 +278,15 @@ impl<'a> ParseItemSetBuilder<'a> {
         result
     }
 
-    #[must_use]
     pub fn first_set(&self, symbol: &Symbol) -> &TokenSet {
         &self.first_sets[symbol]
     }
 
-    #[must_use]
     pub fn reserved_first_set(&self, symbol: &Symbol) -> Option<&TokenSet> {
         let id = *self.reserved_first_sets.get(symbol)?;
         Some(&self.syntax_grammar.reserved_word_sets[id.0])
     }
 
-    #[must_use]
     pub fn last_set(&self, symbol: &Symbol) -> &TokenSet {
         &self.last_sets[symbol]
     }
